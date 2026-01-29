@@ -1,0 +1,61 @@
+<template>
+    <div class="backGround-Container">
+
+    <div class="slds-box slds-p-around_large card" style="max-width:450px;margin:auto">
+        <h2 class="slds-text-heading_medium slds-text-align_center">
+            Create Account
+        </h2>
+
+        <lightning-input
+            label="First Name"
+            onchange={handleFirstName}>
+        </lightning-input>
+
+        <lightning-input
+            label="Last Name"
+            required
+            onchange={handleLastName}>
+        </lightning-input>
+
+        <lightning-input
+            label="Email"
+            type="email"
+            required
+            onchange={handleEmail}>
+        </lightning-input>
+
+        <lightning-input
+            label="Password"
+            type="password"
+            required
+            onchange={handlePassword}>
+        </lightning-input>
+
+        <lightning-input
+            label="Confirm Password"
+            type="password"
+            required
+            onchange={handleConfirmPassword}>
+        </lightning-input>
+
+        <lightning-button
+            label="Register"
+            variant="brand"
+            class="slds-m-top_medium slds-size_full"
+            onclick={handleRegister}>
+        </lightning-button>
+
+        <div class="slds-m-top_medium slds-text-align_center">
+            <a onclick={redirectToLogin}>
+                Already have an account? Login
+            </a>
+        </div>
+
+        <template if:true={error}>
+            <div class="slds-text-color_error slds-m-top_small">
+                {error}
+            </div>
+        </template>
+    </div>
+    </div>
+</template>

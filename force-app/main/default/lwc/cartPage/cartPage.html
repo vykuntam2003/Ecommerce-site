@@ -1,0 +1,39 @@
+<template>
+    <template if:false={isCartEmpty}> 
+        
+        <div class="slds-box slds-m-around_small">
+            <lightning-input type="checkbox" label="Select all items" onchange={handleSelectAll} checked={isAllSelected}></lightning-input>
+        </div>
+    <template for:each={formattedCartItems} for:item="item">
+        <div key={item.id} class="slds-box slds-m-around_small box">
+            <lightning-input type="checkbox" checked={item.selected} data-id={item.id} onchange={handleSelectionItem}></lightning-input>
+
+            <!-- <img src={item.image} alt={item.name} /><br> -->
+             <div class="cartImgBox">
+                <lightning-formatted-rich-text value={item.image}></lightning-formatted-rich-text>
+             </div>
+            <span>{item.name}</span><br>
+            
+            <span>Quantity: {item.quantity}</span><br>
+            <span>Price: {item.totalPrice}</span><br>
+            <lightning-button label="Buy Now" variant ="brand" onclick={handleBuyNow} class="button-colors" data-id={item.id}></lightning-button>
+
+        </div>
+        
+        
+        </template>
+
+    <div class="buyAll">
+        <lightning-button label="Buy All" variant ="brand" onclick={handleBuyAll} class="button-colors"></lightning-button>
+    </div>
+    
+    <div class="slds-box slds-m-around_small">
+        <span>Total Amount: {totalAmount}</span>
+    </div>
+    </template>
+    <template if:true={isCartEmpty}>
+        <div class="slds-box slds-m-around_small empty-cart">
+            <span>Your cart is empty.</span>
+        </div>
+        </template>
+</template>

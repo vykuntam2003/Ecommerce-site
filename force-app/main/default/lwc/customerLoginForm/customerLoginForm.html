@@ -1,0 +1,45 @@
+<template>
+    <div class="maincard">
+    
+    <div class="image">
+            <img src="/resource/StoreLogo" alt="Store Logo" class="logo-image"/>
+        </div>
+    <div class="slds-box slds-p-around_large cards transparent" style="max-width:400px;margin:auto">
+        <h2 class="slds-text-heading_medium slds-text-align_center">Login</h2>
+        
+
+        <lightning-input
+            label="Username"
+            value={username}
+            onchange={handleUsernameChange}>
+        </lightning-input>
+
+        <lightning-input
+            label="Password"
+            type="password"
+            value={password}
+            onchange={handlePasswordChange}>
+        </lightning-input>
+
+        <lightning-button
+            label="Login"
+            variant="brand"
+            class="slds-m-top_medium slds-size_full"
+            onclick={handleLogin}>
+        </lightning-button>
+
+        <div class="slds-m-top_medium slds-text-align_center">
+            <a onclick={goToForgotPassword}>Forgot Password?</a>
+            <br/>
+            <a onclick={goToRegister}>Don’t have an account? Register</a>
+        </div>
+
+        <template if:true={errorMessage}>
+            <div class="slds-text-color_error slds-m-top_small">
+                {errorMessage}
+            </div>
+        </template>
+    </div>
+    </div>
+    
+</template>

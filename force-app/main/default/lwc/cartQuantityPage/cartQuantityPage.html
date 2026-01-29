@@ -1,0 +1,26 @@
+<template>
+        <section role="dialog" class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container ">
+            <header class="slds-modal__header card">
+                <h2 class="slds-text-heading_medium">Product already in cart</h2>
+            </header>
+            <div class="slds-modal__content slds-p-around_medium slds-text-align_center card">
+                <p>The product you are trying to add is already in your cart. Would you like to update the quantity instead?</p>
+
+                <div class="slds-m-top_medium">
+                    <lightning-button label="-" onclick={decrease}></lightning-button>
+                    <span class="slds-m-horizontal_medium">{product.quantity}</span>
+                    <lightning-button label="+" onclick={increase}></lightning-button>
+                </div>
+
+            </div>
+            <footer class="slds-modal__footer card">
+                <lightning-button label="close" variant="neutral" onclick={closeModal}></lightning-button>
+            </footer>
+            
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+    
+    
+</template>

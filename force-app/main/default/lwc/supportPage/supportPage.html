@@ -1,0 +1,112 @@
+<template>
+    <div class="card">
+        <div class="slds-p-around_medium slds-col slds-size_1-of-2">
+
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading...." size="medium"></lightning-spinner>
+
+            </template>
+
+            <lightning-combobox
+                label="Select Issue Type"
+                placeholder="Select Issue"
+                options={issueOptions}
+                value={selectedIssue}
+                onchange={handleIssueChange}>
+            </lightning-combobox>
+
+            <template if:true={selectedIssue}>
+
+                
+                <template if:true={isBillingInquiry}>
+                    <lightning-record-edit-form
+                        object-api-name="Case"
+                        record-type-id={selectedIssue}
+                        onsuccess={handleSuccess}
+                        class="slds-m-top_medium"
+                        onsubmit={handleSubmit}
+                        onerror={handleError}
+                        onload={handleLoad}>
+
+                        <div class="slds-grid slds-wrap slds-gutters">
+
+                            <div class="slds-col slds-size_1-of-2">
+                                <lightning-input-field field-name="Origin"></lightning-input-field>
+                                <lightning-input-field field-name="Subject"></lightning-input-field>
+                                <lightning-input-field field-name="Status"></lightning-input-field>
+                            </div>
+
+                            <div class="slds-col slds-size_1-of-2">
+                                <lightning-input-field field-name="Type"></lightning-input-field>
+                                <lightning-input-field field-name="Priority"></lightning-input-field>
+                            </div>
+
+                            <div class="slds-col slds-size_1-of-1">
+                                <lightning-input-field field-name="Description"></lightning-input-field>
+                            </div>
+
+                        </div>
+
+                        <div class="slds-m-top_medium">
+                            <lightning-button
+                                type="submit"
+                                variant="brand"
+                                class="submit-button"
+                                label="Submit"
+                                disabled={isLoading}>
+                            </lightning-button>
+                        </div>
+
+                    </lightning-record-edit-form>
+                </template>
+
+                
+                <template if:true={isMisMatched}>
+                    <lightning-record-edit-form
+                        object-api-name="Case"
+                        record-type-id={selectedIssue}
+                        onsuccess={handleSuccess}
+                        class="slds-m-top_medium"
+                        onsubmit={handleSubmit}
+                        onerror={handleError}
+                        onload={handleLoad}>
+
+                        <div class="slds-grid slds-wrap slds-gutters">
+
+                            <div class="slds-col slds-size_1-of-2">
+                                <lightning-input-field field-name="Origin"></lightning-input-field>
+                                <lightning-input-field field-name="Subject"></lightning-input-field>
+                                <lightning-input-field field-name="Status"></lightning-input-field>
+                            </div>
+
+                            <div class="slds-col slds-size_1-of-2">
+                                <lightning-input-field field-name="Type"></lightning-input-field>
+                                <lightning-input-field field-name="Priority"></lightning-input-field>
+                                <lightning-input-field field-name="Reason"></lightning-input-field>
+                            </div>
+
+                            <div class="slds-col slds-size_1-of-1">
+                                <lightning-input-field field-name="Description"></lightning-input-field>
+                                <lightning-input-field field-name="Product__c"></lightning-input-field>
+                            </div>
+
+                        </div>
+
+                        <div class="slds-m-top_medium">
+                            <lightning-button
+                                type="submit"
+                                variant="brand"
+                                class="submit-button"
+                                label="Submit"
+                                disabled={isLoading}>
+                            </lightning-button>
+                        </div>
+
+                    </lightning-record-edit-form>
+                </template>
+
+            </template>
+
+        </div>
+    </div>
+</template>

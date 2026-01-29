@@ -1,0 +1,15 @@
+<template>
+    <div class = "card">
+    <lightning-card title="Exporting Object Records">
+        <div class = "button">
+        <lightning-input label=" Enter Object Name" value={objectName} onchange={handleObjectChange}></lightning-input>
+        <lightning-input label=" Enter Name" value={name} onchange={handleNameChange}></lightning-input>
+        </div>
+
+        <div class = "button"><lightning-button variant = "Brand" label="Export " onclick={handleCsvFile}>
+
+        </lightning-button></div>
+
+    </lightning-card></div>
+    
+</template>

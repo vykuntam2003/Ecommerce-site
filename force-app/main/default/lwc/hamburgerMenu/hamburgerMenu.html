@@ -1,0 +1,23 @@
+<template>
+    <div class="backdrop" onclick={closeMenu}></div>
+    <section class="drawer" onclick={stopPropagation}>
+        <div class="drawerHeader">
+            <h2 class="title">Shop by Category</h2>
+        </div>
+        <div class="menu">
+        <div class="menu-item" onclick={handleMenuItemClick} data-id="Electronics">Electronics</div>
+        <div class="menu-item" onclick={handleMenuItemClick} data-id="Fashion">Fashion</div>
+        <div class="menu-item" onclick={handleMenuItemClick} data-id="Toys">Toys</div>
+        <!-- <div class="menu-item" onclick={handleMenuItemClick} data-id="HomeAppliances">Home Appliances</div> -->
+        <div class="menu-item" onclick={handleMenuItemClick} data-id="Sports">Sports</div>
+        <div class="menu-item" onclick={handleMenuItemClick} data-id="Grocery">Grocery</div>
+        <div class="menu-item" onclick={handleMenuItemClick} data-id="Books">Books</div>
+      
+        
+    </div>
+    </section>
+
+     
+    
+    
+</template>

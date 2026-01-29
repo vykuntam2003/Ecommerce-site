@@ -1,0 +1,30 @@
+.cards{
+    background-color: rgb(237, 235, 235);
+}
+
+.image{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.logo-image{
+    width: 150px;
+    height: auto;
+}
+
+
+.logo-image{
+    width: 150px;
+    height: auto;
+}
+
+.maincard {
+    background-image: url(/resource/logindrop);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    height: 133%;
+
+}
+.transparent{
+    background-color:  rgb(255 255 255 / 41%);
+}

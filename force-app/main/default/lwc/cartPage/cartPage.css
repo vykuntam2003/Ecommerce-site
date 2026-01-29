@@ -1,0 +1,29 @@
+.button-colors{
+    --sds-c-button-brand-color-background: #dda556; /* Your custom background color (e.g., a shade of orange) */
+    --sds-c-button-brand-color-background-hover: #f3bc56; /* Color on hover */
+    --sds-c-button-brand-color-border: #ee9842; /* Custom border color */
+    --sds-c-button-brand-color-border-hover: #f87c2a; /* Border color on hover */
+    --sds-c-button-brand-text-color: #100f0f;
+}
+
+.box{
+    width: 30%;
+    background-color: #ffff;
+}
+
+.empty-cart{
+    background-color: #ffff;
+}
+
+.cartImgBox{
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.cartImgBox img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}

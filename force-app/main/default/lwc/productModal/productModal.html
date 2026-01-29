@@ -1,0 +1,82 @@
+<template>
+    <div class="slds-box slds-p-around_medium card">
+
+        <lightning-button
+            icon-name="utility:back"
+            variant="base"
+            onclick={goBack}>
+        </lightning-button>
+
+        <template if:true={product}>
+    <div class="layout">
+
+    <div class="selected">
+
+        <h2 class="slds-text-heading_medium slds-m-top_medium">
+            Product Name: {product.name}
+        </h2>
+
+        <!-- <img src={product.image} class="slds-m-top_medium" /> -->
+        <div class=" productImgBox slds-m-top_medium">
+            <lightning-formatted-rich-text value={product.image}></lightning-formatted-rich-text>
+        </div>
+
+        <p><strong>Price:</strong> ₹ {product.price}</p>
+        <p><strong>Dimensions:</strong> {product.dimensions}</p>
+        <p><strong>Weight:</strong> {product.weight}</p>
+        <div class="btns">
+                    <lightning-button
+                        label="Buy Now"
+                        variant="brand"
+                        class="button-colors"
+                        data-id={product.id}
+                        onclick={handleBuyNow}>
+                    </lightning-button>
+
+                    <lightning-button
+                        label="Add to Cart"
+                        variant="brand"
+                        class="button-colors"
+                        data-id={product.id}
+                        onclick={addToCart}>
+                    </lightning-button>
+                </div>
+
+        <div class="box">
+
+            <template lwc:if={showSpecs}>
+        <h3 class="slds-m-top_medium"><b>Specifications:</b></h3>
+        <ul>
+            <template for:each={specList} for:index="index" for:item="spec">
+                <template lwc:if={spec}>
+                    <li key={spec}>{spec}</li>
+                </template>
+               
+            </template>
+        </ul>
+        </template>
+        </div>
+    </div>
+
+    
+    <div class="similar">
+        <h2 class="slds-text-heading_medium slds-m-top_medium">Similar Products({product.category})</h2>
+    <div class="flexbox">
+
+    <template for:each={similarProducts} for:item="simProd">
+        <div key={simProd.id}  class="similarCard" data-id={simProd.id} onclick={handleSimilarClick}>
+            <div class="similarImgBox">
+                <lightning-formatted-rich-text value={simProd.image}></lightning-formatted-rich-text>
+            </div>
+            <h3>{simProd.name}</h3>
+            <p>Price: ₹ {simProd.price}</p>
+        </div>
+        
+    </template>
+    </div>
+    </div>
+    </div>
+    </template>
+    </div>
+
+</template>

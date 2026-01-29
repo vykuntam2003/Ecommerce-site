@@ -1,0 +1,10 @@
+.backGround-Container {
+    background-image: url(/resource/wallpaper);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    height: 101%;
+}
+
+.card{
+    background-color: rgba(255, 255, 255, 0.8);
+}

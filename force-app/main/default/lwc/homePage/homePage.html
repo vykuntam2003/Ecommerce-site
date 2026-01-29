@@ -1,0 +1,38 @@
+<template>
+    <div class="slds-m-around_medium slds-box slds-theme_default image-wrapper">
+
+        <img src="/resource/background" alt="Store Image" class="background-image"/>
+
+        <div class="wallet-balance">
+                <p><strong>Wallet Balance: ₹ {walletBalance}</strong></p>
+                 <template if:false={isMoney}>
+        <lightning-button  label="TopUp Wallet" variant="base" onclick={addMoneyToWallet}></lightning-button>
+        </template>
+        <template if:true={isMoney}>
+            <div class="boxSizes">
+
+        <lightning-input label="Amount" type="number" onchange={handleAmount} required="true"></lightning-input>
+        <lightning-input label="Card Number"   maxlength="19" pattern="^\ {4}\s?\d{4}\s?\d{4}\s?\d{4}$" message-when-pattern-missmatch="Enter 16 digit card  number" onchange={handleCard} required="true" type="text"></lightning-input>
+        <lightning-input label="Expiry (MM/YY)" pattern="(0[1-9]|1[0-2])\/[0-9]{2}" message-when-pattern-mismatch="Enter expiry in MM/YY format" onchange={handleExpiry} required="true"></lightning-input>
+        <lightning-input label="CVV" pattern="[0-9]{3}" message-when-pattern-mismatch="Enter 3 digit CVV" type="password" maxlength="3" onchange={handleCvv} required="true"></lightning-input>
+        </div>
+
+        <lightning-button label="Add Money To Wallet" onclick={addMoney}></lightning-button>
+        
+
+        <template if:true={message}><p>{message}</p></template>
+        <template if:true={error}><p class="slds-text-color_error">{error}</p></template>
+        </template>
+            </div>
+        <div class="text-overlay slds-text-align_center">
+            
+            <h1 class="slds-text-heading_large slds-text-color_inverse">
+                Welcome to ABSYZ Store!
+            </h1>
+            <p class="slds-text-body_regular slds-text-color_inverse slds-m-top_small">
+                Discover our wide range of products and enjoy seamless support.
+            </p>
+        </div>
+
+    </div>
+</template>

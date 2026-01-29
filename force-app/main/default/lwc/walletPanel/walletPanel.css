@@ -1,0 +1,20 @@
+.boxSizes{
+    width:314px;
+
+}
+.wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 500px;
+    /* background-color: grey; */
+}
+
+.background{
+    background-color:rgb(205, 204, 211);
+}
+
+.childDiv{
+    background-color: white;
+}

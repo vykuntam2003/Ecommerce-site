@@ -1,0 +1,39 @@
+<template>
+    <div class="cards">
+        <template for:each={productsList} for:item="product">
+            <div key={product.id} class="card">
+                <!-- <img
+                    src={product.image}
+                    alt={product.name}
+                    data-id={product.id}
+                    onclick={handleImageClick}
+                /> -->
+                <div class="imgBox" data-id={product.id} onclick={handleImageClick}>
+                    <lightning-formatted-rich-text value={product.image}></lightning-formatted-rich-text>
+
+                </div>
+
+                <h3>{product.name}</h3>
+                <p>Price: ₹ {product.price}</p>
+
+                <div class="btns">
+                    <lightning-button
+                        label="Buy Now"
+                        variant="brand"
+                        class="button-colors"
+                        data-id={product.id}
+                        onclick={handleBuyNow}>
+                    </lightning-button>
+
+                    <lightning-button
+                        label="Add to Cart"
+                        variant="brand"
+                        class="button-colors"
+                        data-id={product.id}
+                        onclick={addToCart}>
+                    </lightning-button>
+                </div>
+            </div>
+        </template>
+    </div>
+</template>
