@@ -27,7 +27,17 @@ public without sharing class CheckoutController {
                 return 'ERROR: Insufficient Balance';
             }
             acc.Wallet_Balance__pc -= totalAmount;
-            update acc;
+            try{
+                update acc;
+                // EcommerceTrackLogger.logEcommerceTrack('Person Account', acc.Id, 'Money Debited From Wallet in the checkout controller class', 'Success');
+                
+
+            }catch(Exception e){
+                EcommerceTrackLogger.logEcommerceTrack('Person Account', '', e.getMessage(), 'Error');
+               
+            }
+            
+            
         }
 
         // Invoice inv = new Invoice(BillingAccountId = acc.Id,	InvoiceDate= Date.today());
@@ -43,8 +53,17 @@ public without sharing class CheckoutController {
         payment.Connected_Status__c = 'pending';
         payment.Payment_Description__c = 'Money is debited from  ' + paymentType;
         paymentHistory.add(payment);
+        
 
-        insert paymentHistory;
+        
+        try{
+            insert paymentHistory;
+            EcommerceTrackLogger.logEcommerceTrack('Payment_History__c', payment.Id, 'Money Debited & order placed & succesfully created transaction in the checkout controller class', 'Success');
+
+        }catch(Exception e){
+            EcommerceTrackLogger.logEcommerceTrack('Payment_History__c', '', e.getMessage(), 'Error');
+
+        }
 
 
         // String receipt = 'Payment Receipt\n\n' +
@@ -120,7 +139,15 @@ public without sharing class CheckoutController {
         cv.PathOnClient = 'Receipt.txt';
         cv.VersionData = Blob.valueOf(receipt);
         cv.FirstPublishLocationId = payment.Id;
-        insert cv;
+        try{
+            insert cv;
+
+
+        }catch(Exception e){
+            EcommerceTrackLogger.logEcommerceTrack('Content Version', '', e.getMessage(), 'Error');
+           
+        }
+        
 
         ContentDistribution dist = new ContentDistribution();
         dist.Name = 'Payment Receipt ';
@@ -128,13 +155,28 @@ public without sharing class CheckoutController {
         dist.PreferencesAllowViewInBrowser = true;
         dist.PreferencesAllowOriginalDownload = true;
         dist.PreferencesLinkLatestVersion = true;
-        insert dist;
+        try{
+            insert dist;
+
+        }catch(Exception e){
+            EcommerceTrackLogger.logEcommerceTrack('Content Distribution', '',e.getMessage(), 'Error');
+
+        }
+        
 
         dist = [SELECT DistributionPublicUrl FROM ContentDistribution WHERE Id = :dist.Id];
 
         payment.Receipt_Public_URL__c = dist.DistributionPublicUrl;
 
-        update payment;
+        
+        try{
+            update payment;
+            // EcommerceTrackLogger.logEcommerceTrack('Payment_History__c', payment.Id, ' transaction created & Reciept Created Successfully in the checkout Controller', 'Success');
+
+        }catch(Exception e){
+            EcommerceTrackLogger.logEcommerceTrack('Payment_History__c', '', e.getMessage(), 'Error');
+
+        }
 
         // Id docId =[SELECT ContentDocumentId FROM ContentVersion WHERE Id =: cv.Id].ContentDocumentId;
 
@@ -181,14 +223,26 @@ public without sharing class CheckoutController {
 );
         mail.setSaveAsActivity(false);
         mail.setUseSignature(false);
+        try{
+             Messaging.sendEmail(new Messaging.SingleEmailMessage[]{ mail });
+             System.debug('mail sent'+ mail);
+             EcommerceTrackLogger.logEcommerceTrack('Email Sending', '', 'Email sent successfully in the checkout controller after order placed', 'Success');
+           
 
-        Messaging.sendEmail(new Messaging.SingleEmailMessage[]{ mail });
-        System.debug('mail sent'+ mail);
+        }catch(Exception e){
+            EcommerceTrackLogger.logEcommerceTrack('Email Sending', '', e.getMessage(), 'Error');
+
+        }
+
+       
 
 
         PaymentSupabaseSync.syncPayment(payment.Id);
 
-        
+        EcommerceTrackLogger.logEcommerceTrack('Person Account', acc.Id, 'Money Debited From Wallet in the checkout controller class', 'Success');
+        EcommerceTrackLogger.logEcommerceTrack('Payment_History__c', payment.Id, ' transaction created & Reciept Created Successfully in the checkout Controller', 'Success');
+
+
         return 'Order Placed Successfully';
 
     

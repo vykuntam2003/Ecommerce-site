@@ -25,7 +25,19 @@ public without sharing class WalletController {
         payment.Connected_Status__c='Pending';
         payment.Payment_Description__c = 'Money added to wallet. The Amount is ' + amount;
         paymentHistory.add(payment);
+        try{
         insert paymentHistory;
+
+            EcommerceTrackLogger.logEcommerceTrack('Payment_History__c', payment.Id, 'Successfully Money added to the wallet & transaction is created from the walllet Controller', 'Success');
+
+        // insert new Tracking_Logs__c(Created_Date_Time__c = System.now(),Message__c = 'Wallet Top up Successfully & payment transaction inserted Successfully From WalletController', Related_Object_Id__c = payment.Id, Related_Object_Name__c = 'Payment_History__c',Result__c = 'Success');
+        } catch(Exception e){
+            EcommerceTrackLogger.logEcommerceTrack('Payment_History__c', '', e.getMessage(), 'Error');
+            
+            // insert new Tracking_Logs__c(Created_Date_Time__c = System.now(),Message__c = e.getMessage(), Related_Object_Id__c = payment.Id, Related_Object_Name__c = 'Payment_History__c',Result__c = 'Error');
+        }
+        
+
 
         PaymentSupabaseSync.syncPayment(payment.Id);
 
@@ -89,7 +101,15 @@ public without sharing class WalletController {
         cv.PathOnClient = 'Wallet_Receipt.txt';
         cv.VersionData = Blob.valueOf(receipt);
         cv.FirstPublishLocationId = payment.Id;
-        insert cv;
+        try{
+            insert cv;
+
+        }catch(Exception e){
+            EcommerceTrackLogger.logEcommerceTrack('Content Version', '', e.getMessage(), 'Error');
+           
+            // insert new Tracking_Logs__c(Created_Date_Time__c = System.now(),Message__c = e.getMessage(), Related_Object_Id__c = cv.Id, Related_Object_Name__c = 'Content Version',Result__c = 'Error');
+        }
+        
 
         ContentDistribution dist = new ContentDistribution();
         dist.Name = 'Wallet Receipt ';
@@ -97,12 +117,30 @@ public without sharing class WalletController {
         dist.PreferencesAllowViewInBrowser = true;
         dist.PreferencesAllowOriginalDownload = true;
         dist.PreferencesLinkLatestVersion = true;
-        insert dist;
+        try{
+            insert dist;
+
+        }catch(Exception e){
+            EcommerceTrackLogger.logEcommerceTrack('Content Version', '', e.getMessage(), 'Error');
+           
+            // insert new Tracking_Logs__c(Created_Date_Time__c = System.now(),Message__c = e.getMessage(), Related_Object_Id__c = dist.Id, Related_Object_Name__c = 'Content Distribution',Result__c = 'Error');
+        }
+        
 
         dist = [SELECT DistributionPublicUrl FROM ContentDistribution WHERE Id = :dist.Id];
 
         payment.Receipt_Public_URL__c = dist.DistributionPublicUrl;
-        update payment;
+        try{
+            update payment;
+           
+            // insert new Tracking_Logs__c(Created_Date_Time__c = System.now(),Message__c = 'Reciept Updated from the distribution in the wallet controller', Related_Object_Id__c = payment.Id, Related_Object_Name__c = 'Payment_History__c',Result__c = 'Success');
+
+        }catch(Exception e){
+            EcommerceTrackLogger.logEcommerceTrack('Person Account', '', e.getMessage(), 'Error');
+           
+            // insert new Tracking_Logs__c(Created_Date_Time__c = System.now(),Message__c = e.getMessage(), Related_Object_Id__c = payment.Id  , Related_Object_Name__c ='payment_History__c',Result__c = 'Error');
+        }
+        
 
         Account acc =[Select Wallet_Balance__pc from Account where Id =: con.AccountId];
 
@@ -111,7 +149,20 @@ public without sharing class WalletController {
         }
         
         acc.Wallet_Balance__pc += amount;
-        update acc;
+        try{
+            update acc; 
+        
+
+            // insert new Tracking_Logs__c(Created_Date_Time__c = System.now(),Message__c = 'Wallet Top up Successfully in the wallet controller ', Related_Object_Id__c = acc.Id, Related_Object_Name__c = 'Person Account',Result__c = 'Success');
+
+        }catch(Exception e){
+            EcommerceTrackLogger.logEcommerceTrack('Person Account', '', e.getMessage(), 'Error');
+           
+            // insert new Tracking_Logs__c(Created_Date_Time__c = System.now(),Message__c = e.getMessage(), Related_Object_Id__c = acc.Id, Related_Object_Name__c = 'Person Account',Result__c = 'Error');
+        }
+
+        EcommerceTrackLogger.logEcommerceTrack('Payment_History__c', payment.Id, 'Succesfully updated the reciept in the payment transaction in the wallet controller', 'Success');
+        EcommerceTrackLogger.logEcommerceTrack('Person Account', acc.Id, 'Successfully added money to the wallet & transaction created in the wallet Controller', 'Success');
         return acc.Wallet_Balance__pc;
     }
 }
