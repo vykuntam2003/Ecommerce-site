@@ -44,3 +44,43 @@
 .card{
     background-color: #f3f3f3;
 }
+
+.maintenance-banner{
+    background-color: #ffb75d;
+    color: #000000;
+    padding: 0.75rem;
+    text-align: center;
+    display:flex ;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: sticky;
+    top: 70px;
+    z-index: 9999;
+    border-bottom: 1px solid #d89e4c;
+}
+
+.border-text{
+    margin-left: 10px;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+/* Profile menu positioning and layering */
+.profile-menu {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-trigger {
+    /* keep default bare icon look; add hit-area if needed */
+}
+
+.profile-dropdown {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    margin-top: 0.25rem;
+    z-index: 10000; /* above sticky banner */
+    min-width: 12rem;
+}

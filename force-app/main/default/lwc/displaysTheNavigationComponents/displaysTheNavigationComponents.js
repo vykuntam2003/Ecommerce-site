@@ -1,7 +1,8 @@
-import { LightningElement, track } from 'lwc';
+import { LightningElement, track, wire } from 'lwc';
 import isGuest from '@salesforce/user/isGuest';
 // import {ShowToastEvent} from 'lightning/platformShowToastEvent';
 import lightningAlert from 'lightning/alert';
+import getMaintenanceStatus from '@salesforce/apex/AppConfigController.getMaintenanceStatus';
 
 
 const PAGE_HOME = 'home';
@@ -12,6 +13,7 @@ const PAGE_CART = 'cart';
 const PAGE_WALLET = 'wallet';
 const PAGE_CHECKOUT = 'checkout';
 const PAGE_PAYMENTS = 'payments';
+const PAGE_PROFILE = 'profile';
 
 export default class DisplaysTheNavigationComponents extends LightningElement {
 
@@ -26,6 +28,10 @@ export default class DisplaysTheNavigationComponents extends LightningElement {
     isCheckout = false;
     isPayments=false;
     isHamburgerMenuOpen=false;
+    isProfileMenuOpen = false;
+
+    @track isMaintenance = false;
+    @track maintenanceMessage ='';
 
     // productsKey=0;
 
@@ -37,6 +43,35 @@ export default class DisplaysTheNavigationComponents extends LightningElement {
     popupItem;
 
     redirectDone = false;
+
+    @wire(getMaintenanceStatus)
+    wiredMaintennance({data,error}){
+        if(data){
+            this.isMaintenance = data.isMaintenance;
+            this.maintenanceMessage = data.message;
+        }else if(error){
+            this.isMaintenance = false;
+            console.error('Error: fecthing maintenance status', error);
+        }
+    }
+
+    // Profile menu handlers
+    toggleProfileMenu() {
+        this.isProfileMenuOpen = !this.isProfileMenuOpen;
+    }
+
+    closeProfileMenu() {
+        this.isProfileMenuOpen = false;
+    }
+
+    handleProfileDetails() {
+        // Navigate to in-app Profile page (LWC)
+        this.closeProfileMenu();
+        this.resetVariables();
+        // show profile page in shell
+        this.isProfile = true;
+        window.history.pushState({ page: PAGE_PROFILE }, '', '');
+    }
 
 
 
@@ -78,6 +113,7 @@ export default class DisplaysTheNavigationComponents extends LightningElement {
         this.isCheckout = false;
         this.isPayments=false;
         this.isHamburgerMenuOpen = false;
+        this.isProfile = false;
     }
 
     restorePage(page, data) {
@@ -118,6 +154,10 @@ export default class DisplaysTheNavigationComponents extends LightningElement {
             
             case PAGE_PAYMENTS:
                 this.isPayments = true;
+                break;
+
+            case PAGE_PROFILE:
+                this.isProfile = true;
                 break;
         }
     }
@@ -243,6 +283,8 @@ export default class DisplaysTheNavigationComponents extends LightningElement {
     
 
     handleLogout() {
+        // Close menu and sign out
+        this.isProfileMenuOpen = false;
         window.location.replace('/AbsyzEcommerce/secur/logout.jsp');
     }
 

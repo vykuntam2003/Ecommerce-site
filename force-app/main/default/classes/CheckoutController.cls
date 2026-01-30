@@ -29,8 +29,8 @@ public without sharing class CheckoutController {
             acc.Wallet_Balance__pc -= totalAmount;
             try{
                 update acc;
-                // EcommerceTrackLogger.logEcommerceTrack('Person Account', acc.Id, 'Money Debited From Wallet in the checkout controller class', 'Success');
-                
+                EcommerceTrackLogger.logEcommerceTrack('Person Account', acc.Id, 'Money Debited From Wallet in the checkout controller class', 'Success');
+                System.debug('line 33 Checkout controller');
 
             }catch(Exception e){
                 EcommerceTrackLogger.logEcommerceTrack('Person Account', '', e.getMessage(), 'Error');
@@ -77,7 +77,7 @@ public without sharing class CheckoutController {
         //                  'We appreciate your business and look forward to serving you again.\n\n' +
         //                  'Best Regards,\nABSYZ Store';
 
-        // ✅ Generate Receipt
+        //  Generate Receipt
         String transactionId = 'TXN' + String.valueOf(System.now().getTime()).substring(3);
         String receiptNumber = 'RCP' + String.valueOf(System.now().getTime()).substring(5);
 
