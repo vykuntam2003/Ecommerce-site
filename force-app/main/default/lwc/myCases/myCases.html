@@ -1,0 +1,74 @@
+<template>
+    <div class="slds-card slds-p-around_medium">
+        <div class="slds-grid slds-wrap slds-gutters slds-align_absolute-center slds-m-bottom_medium">
+            <lightning-icon icon-name="utility:case" size="large" alternative-text="Cases"></lightning-icon>
+            <h2 class="slds-text-heading_medium slds-m-left_small">My Cases</h2>
+        </div>
+
+        <template if:true={loading}>
+            <div class="slds-is-relative slds-p-vertical_large">
+                <lightning-spinner alternative-text="Loading cases..." size="medium"></lightning-spinner>
+            </div>
+        </template>
+
+        <template if:true={error}>
+            <div class="slds-text-color_error slds-m-bottom_small">
+                {error}
+            </div>
+        </template>
+
+        <template if:true={cases}>
+            <div class="slds-table_container">
+                <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                    <thead>
+                        <tr class="slds-line-height_reset">
+                            <th scope="col">
+                                <div class="slds-truncate" title="Case Number">Case Number</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Subject">Subject</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Status">Status</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Priority">Priority</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Created Date">Created Date</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={cases} for:item="caseItem">
+                            <tr key={caseItem.Id} class="slds-hint-parent">
+                                <td data-label="Case Number">
+                                    <div class="slds-truncate" title={caseItem.CaseNumber}>{caseItem.CaseNumber}</div>
+                                </td>
+                                <td data-label="Subject">
+                                    <div class="slds-truncate" title={caseItem.Subject}>{caseItem.Subject}</div>
+                                </td>
+                                <td data-label="Status">
+                                    <div class="slds-truncate" title={caseItem.Status}>{caseItem.Status}</div>
+                                </td>
+                                <td data-label="Priority">
+                                    <div class="slds-truncate" title={caseItem.Priority}>{caseItem.Priority}</div>
+                                </td>
+                                <td data-label="Created Date">
+                                    <div class="slds-truncate" title={caseItem.CreatedDate}>{caseItem.CreatedDate}</div>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </template>
+
+        <template if:true={noCases}>
+            <div class="slds-text-align_center slds-p-top_medium">
+                <lightning-icon icon-name="utility:info" size="medium" alternative-text="No Cases"></lightning-icon>
+                <p class="slds-text-body_regular slds-m-top_small no-cases-message">No unresolved cases found. You may not have any unresolved cases created or assigned to you.</p>
+            </div>
+        </template>
+    </div>
+</template>

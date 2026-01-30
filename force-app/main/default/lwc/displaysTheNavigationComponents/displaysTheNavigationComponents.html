@@ -31,6 +31,11 @@
                             </a>
                         </li>
                         <li class="slds-dropdown__item" role="presentation">
+                            <a role="menuitem" tabindex="0" onclick={handleMyCases}>
+                                <span class="slds-truncate" title="My Cases">My Cases</span>
+                            </a>
+                        </li>
+                        <li class="slds-dropdown__item" role="presentation">
                             <a role="menuitem" tabindex="0" onclick={handleLogout}>
                                 <span class="slds-truncate" title="Sign Out">Sign Out</span>
                             </a>
@@ -112,6 +117,10 @@
 
     <template if:true={isProfile}>
         <c-profile-page></c-profile-page>
+    </template>
+
+    <template if:true={isCases}>
+        <c-my-cases></c-my-cases>
     </template>
 
     <template if:true={showCartPopup}>

@@ -1,0 +1,21 @@
+.slds-table th {
+    font-weight: 600;
+}
+
+.slds-table td {
+    vertical-align: middle;
+}
+
+.slds-table tbody tr:hover {
+    background-color: #f4f6f9;
+}
+
+.profile-card {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.no-cases-message {
+    font-size: 1rem;
+    color: #333;
+}

@@ -73,6 +73,15 @@ export default class DisplaysTheNavigationComponents extends LightningElement {
         window.history.pushState({ page: PAGE_PROFILE }, '', '');
     }
 
+    handleMyCases() {
+        // Navigate to My Cases page (LWC)
+        this.closeProfileMenu();
+        this.resetVariables();
+        // show cases page in shell
+        this.isCases = true;
+        window.history.pushState({ page: 'cases' }, '', '');
+    }
+
 
 
     connectedCallback() {
@@ -114,6 +123,7 @@ export default class DisplaysTheNavigationComponents extends LightningElement {
         this.isPayments=false;
         this.isHamburgerMenuOpen = false;
         this.isProfile = false;
+        this.isCases = false;
     }
 
     restorePage(page, data) {
@@ -158,6 +168,10 @@ export default class DisplaysTheNavigationComponents extends LightningElement {
 
             case PAGE_PROFILE:
                 this.isProfile = true;
+                break;
+                
+            case 'cases':
+                this.isCases = true;
                 break;
         }
     }
