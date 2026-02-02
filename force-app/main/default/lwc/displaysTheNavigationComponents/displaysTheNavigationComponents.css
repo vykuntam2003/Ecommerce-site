@@ -45,31 +45,54 @@
     background-color: #f3f3f3;
 }
 
-.maintenance-banner{
+.maintenance-banner {
     background-color: #ffb75d;
-    color: #000000;
-    padding: 0.75rem;
-    text-align: center;
-    display:flex ;
-    justify-content: center;
-    align-items: center;
+    color: #000;
+    padding: 10px 0;
     width: 100%;
+    overflow: hidden; /* Hides the text when it goes off-screen */
     position: sticky;
-    top: 70px;
+    top: 0;
     z-index: 9999;
     border-bottom: 1px solid #d89e4c;
+    display: flex;
+    align-items: center;
+}
+.marquee-container {
+    display: flex;
+    width: 100%;
 }
 
-.border-text{
-    margin-left: 10px;
-    font-weight: 500;
-    font-size: 0.9rem;
+.marquee-text {
+    display: flex;
+    align-items: center;
+    white-space: nowrap; /* Forces text to stay on one single line */
+    flex-shrink: 0;     /* Critical: Prevents the container from narrowing the text */
+    min-width: 100%;
+    padding-left: 100%; /* Starts the "train" at the far right edge */
+    animation: scroll-left 15s linear infinite; /* 20s is a readable speed */
 }
 
 /* Profile menu positioning and layering */
 .profile-menu {
     position: relative;
     display: inline-block;
+}
+.spacer {
+    padding: 0 50px; /* Space between the repeating messages */
+}
+
+@keyframes scroll-left {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.maintenance-banner:hover .marquee-text {
+    animation-play-state: paused;
 }
 
 .profile-trigger {

@@ -44,7 +44,7 @@ public without sharing class WalletController {
         // String receipt = 'Wallet Top-Up Receipt\n\n' +
         //                  'Thank you for adding money to your wallet!\n\n' +
         //                  'Amount Added: ₹' + amount + '\n' +
-        //                  'Payment Method: Credit Card\n\n' +
+        //    c              'Payment Method: Credit Card\n\n' +
         //                  'The top-up was successfully processed on ' + System.now().format('dd-MM-yyyy HH:mm:ss') + '.\n\n' +
         //                  'Payment Confirmation: Your wallet has been successfully credited.\n\n' +
         //                  'We appreciate your business and look forward to serving you again.\n\n' +

@@ -1,15 +1,40 @@
 <template>
     <div class="card">
-        <template lwc:if={isMaintenance}>
-            <div class="maintenance-banner">
-                <lightning-icon icon-name="utility:warning" variant="inverse" size="small">
-
+       <template lwc:if={isMaintenance}>
+    <div class="maintenance-banner">
+        <div class="marquee-container">
+            <div class="marquee-text">
+                <lightning-icon 
+                    icon-name="utility:warning" 
+                    variant="inverse" 
+                    size="x-small" 
+                    class="slds-m-right_small">
                 </lightning-icon>
-                <span class = "banner-text">
-                    <strong>System Notice:</strong>{maintenanceMessage}
-                </span>
+                <span> {maintenanceMessage}</span>
+                
+                <span class="spacer">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                
+                <lightning-icon 
+                    icon-name="utility:warning" 
+                    variant="inverse" 
+                    size="x-small" 
+                    class="slds-m-right_small">
+                </lightning-icon>
+                <span> {maintenanceMessage}</span>
+
+                 <span class="spacer">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                
+                <lightning-icon 
+                    icon-name="utility:warning" 
+                    variant="inverse" 
+                    size="x-small" 
+                    class="slds-m-right_small">
+                </lightning-icon>
+                <span> {maintenanceMessage}</span>
             </div>
-        </template>
+        </div>
+    </div>
+</template>
         
     <div class="logoutCart">
         <!-- Profile menu replacing direct Sign out -->
