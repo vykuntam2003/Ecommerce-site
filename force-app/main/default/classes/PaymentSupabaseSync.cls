@@ -18,4 +18,4 @@ public without sharing class PaymentSupabaseSync {
 
     }
 
-}   
+}

@@ -24,5 +24,3 @@ public without sharing class AppConfigController {
         }
 
 }
-
-    
