@@ -1,28 +1,49 @@
-.button-colors{
-    --sds-c-button-brand-color-background: #dda556; /* Your custom background color (e.g., a shade of orange) */
-    --sds-c-button-brand-color-background-hover: #f3bc56; /* Color on hover */
-    --sds-c-button-brand-color-border: #ee9842; /* Custom border color */
-    --sds-c-button-brand-color-border-hover: #f87c2a; /* Border color on hover */
-    --sds-c-button-brand-text-color: #100f0f;
+.button-colors {
+    --sds-c-button-brand-color-background: #d4a574;
+    --sds-c-button-brand-color-background-hover: #c09660;
+    --sds-c-button-brand-color-border: #d4a574;
+    --sds-c-button-brand-color-border-hover: #c09660;
+    --sds-c-button-brand-text-color: #ffffff;
+    font-weight: 600;
+    transition: all 0.2s ease;
 }
 
-.box{
+.box {
     width: 30%;
-    background-color: #ffff;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    padding: 1.5rem;
+    border: 1px solid #f0f0f0;
 }
 
-.empty-cart{
-    background-color: #ffff;
+.empty-cart {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    padding: 2rem;
+    text-align: center;
+    border: 1px solid #f0f0f0;
 }
 
-.cartImgBox{
+.cartImgBox {
     width: 150px;
     height: 150px;
     overflow: hidden;
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
 }
 
-.cartImgBox img{
+.cartImgBox:hover {
+    transform: scale(1.05);
+}
+
+.cartImgBox img {
     width: 100%;
     height: 100%;
     object-fit: contain;
