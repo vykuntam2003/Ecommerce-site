@@ -68,7 +68,7 @@
     flex-shrink: 0;     /* Critical: Prevents the container from narrowing the text */
     min-width: 100%;
     padding-left: 100%; /* Starts the "train" at the far right edge */
-    animation: scroll-left 15s linear infinite; /* 20s is a readable speed */
+    animation: scroll-left 25s linear infinite; /* 20s is a readable speed */
 }
 
 /* Profile menu positioning and layering */

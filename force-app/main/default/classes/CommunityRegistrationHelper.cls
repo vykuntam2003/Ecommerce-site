@@ -6,7 +6,7 @@ public with sharing class CommunityRegistrationHelper {
         List<Account> accs = [
             SELECT Id
             FROM Account
-            WHERE Name = 'Absyz Consulting'
+            WHERE Name = 'experience community users'
             LIMIT 1
         ];
 

@@ -1,0 +1,16 @@
+<apex:page controller="VFObjectRecordsController"
+    lightningStylesheets="true"
+    showHeader="false"
+    sidebar="false">
+
+    <apex:sectionHeader title="Account Records"/>
+
+    <apex:pageBlock title="Accounts">
+        <apex:pageBlockTable value="{!accountList}" var="acc">
+            <apex:column value="{!acc.Name}" headerValue="Account Name"/>
+            <apex:column value="{!acc.CreatedDate}" headerValue="Created Date"/>
+            <apex:column value="{!acc.LastModifiedDate}" headerValue="Last Modified Date"/>
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+
+</apex:page>
