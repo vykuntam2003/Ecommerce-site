@@ -10,8 +10,7 @@ public with sharing class CaseController {
             SELECT Id, CaseNumber, Subject, Status, Priority, CreatedDate 
             FROM Case 
             WHERE OwnerId = :currentUserId 
-            AND Status != 'Resolved'
-            AND Status != 'Closed'
+            
             ORDER BY CreatedDate DESC
         ];
         

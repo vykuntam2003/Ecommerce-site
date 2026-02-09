@@ -93,9 +93,8 @@
     animation-play-state: paused;
 }
 
-.profile-trigger {
-    /* keep default bare icon look; add hit-area if needed */
-}
+
+
 
 .profile-dropdown {
     position: absolute;
